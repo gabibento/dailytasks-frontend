@@ -1,5 +1,8 @@
 package com.java.taskmanager.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +22,13 @@ public class TaskService {
 		Task entity = repository.save(task);
 		TaskDTO dto = new TaskDTO(entity);
 		return dto;
+	}
+	@Transactional(readOnly = true)
+	public List<TaskDTO> findAll(){
+		List<Task> tasks = repository.findAll();
+		List<TaskDTO> dtos = new ArrayList<>();
+		tasks.forEach(task -> dtos.add(new TaskDTO(task)));
+		return dtos;
 	}
 
 }

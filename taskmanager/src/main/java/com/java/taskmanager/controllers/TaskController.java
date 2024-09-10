@@ -1,6 +1,9 @@
 package com.java.taskmanager.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,5 +23,9 @@ public class TaskController {
 	@PostMapping
 	public TaskDTO insert(@RequestBody Task task) {
 		return service.insert(task);
+	}
+	@GetMapping
+	public List<TaskDTO> findAll() {
+		return service.findAll();
 	}
 }
