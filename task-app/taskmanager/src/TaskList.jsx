@@ -20,7 +20,7 @@ function TaskList() {
     };
 
     fetchTasks(); 
-  }, []); 
+  }, [tasks]); 
 
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>Erro: {error}</p>;
