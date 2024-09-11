@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,10 +18,10 @@ public class TaskService {
 	private TaskRepository repository;
 	
 	@Transactional
-	public ResponseEntity<TaskDTO> insert(Task task) {
+	public TaskDTO insert(Task task) {
 		Task entity = repository.save(task);
 		TaskDTO dto = new TaskDTO(entity);
-		return ResponseEntity.ok(dto);
+		return dto;
 	}
 	@Transactional(readOnly = true)
 	public List<TaskDTO> findAll(){
