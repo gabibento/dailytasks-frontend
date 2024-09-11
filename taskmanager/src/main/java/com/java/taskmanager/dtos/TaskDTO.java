@@ -7,16 +7,18 @@ public class TaskDTO {
 	private String title;
 	private boolean completed;
 	private Long categoryId;
+	private String categoryName;
 	
 	public TaskDTO() {
 
 	}
 	
-	public TaskDTO(Long id, String title, boolean completed, Long categoryId) {
+	public TaskDTO(Long id, String title, boolean completed, Long categoryId, String categoryName) {
 		this.id = id;
 		this.title = title;
 		this.completed = completed;
 		this.categoryId = categoryId;
+		this.categoryName= categoryName; 
 	}
 
 	public TaskDTO(Task task) {
@@ -24,6 +26,7 @@ public class TaskDTO {
 		title = task.getTitle();
 		completed = task.isCompleted();
 		categoryId = task.getCategory().getId();
+		categoryName = task.getCategory().getName();
 	}
 	
 	public Long getId() {
@@ -51,6 +54,14 @@ public class TaskDTO {
 
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 	
 	

@@ -23,23 +23,30 @@ public class TaskService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	public TaskDTO insert(TaskDTO dto) {
-		
-		Task task = new Task();
-		task.setTitle(dto.getTitle());
-		task.setCompleted(dto.isCompleted());
-
-		Optional<Category> categoryOpt = categoryRepository.findById(dto.getCategoryId());
-		if (categoryOpt.isPresent()) {
-			task.setCategory(categoryOpt.get());
-		} else {
-			throw new RuntimeException("Category not found");
-		}
-
-		task = taskRepository.save(task);
-
-		return new TaskDTO(task);
+	public TaskDTO update(Task task) {
+		Task entity = taskRepository.save(task);
+		return new TaskDTO(entity);
 	}
+	
+	public TaskDTO insert(TaskDTO dto) {
+        
+        Task task = new Task();
+        task.setTitle(dto.getTitle());
+        task.setCompleted(dto.isCompleted());
+       
+        Optional<Category> categoryOpt = categoryRepository.findById(dto.getCategoryId());
+        if (categoryOpt.isPresent()) {
+            task.setCategory(categoryOpt.get());
+        } else {
+            throw new RuntimeException("Category not found");
+        }
+
+        task = taskRepository.save(task);
+        
+        return new TaskDTO(task);
+    }
+
+
 
 	@Transactional(readOnly = true)
 	public List<TaskDTO> findAll() {

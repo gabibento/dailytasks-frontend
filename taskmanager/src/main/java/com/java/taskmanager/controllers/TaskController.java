@@ -48,9 +48,8 @@ public class TaskController {
 		Task task = optionalTask.get();
 		task.setCompleted(!task.isCompleted());
 		
-		TaskDTO dto = new TaskDTO(task);
 		
-		TaskDTO updatedTask = service.insert(dto);
+		TaskDTO updatedTask = service.update(task);
         return ResponseEntity.ok(updatedTask);
 	}
 	@DeleteMapping("/{id}")

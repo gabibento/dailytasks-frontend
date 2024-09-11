@@ -59,6 +59,7 @@ function TaskList() {
             <li key={task.id}>
              <input type="checkbox" checked={task.completed} onChange={() => toggleTaskCompleted(task.id)}/>
               <strong>{task.title}</strong> 
+              <p>{task.categoryName}</p>
               <button onClick={() => deleteById(task.id)}>Delete</button>
             </li>
           ))
