@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,16 +19,20 @@ public class Task {
 	@Column(nullable = false)
 	private String title;
 	private boolean completed;
+	@ManyToOne
+    @JoinColumn(name = "category_id")
+	private Category category;
 	
 	public Task() {
 		super();
 	}
 	
-	public Task(Long id, String title, boolean completed) {
+	public Task(Long id, String title, boolean completed, Category category) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.completed = completed;
+		this.category = category;
 	}
 	
 	public Long getId() {
@@ -46,6 +52,14 @@ public class Task {
 	}
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
 	

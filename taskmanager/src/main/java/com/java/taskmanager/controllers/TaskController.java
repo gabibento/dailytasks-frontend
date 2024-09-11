@@ -33,7 +33,7 @@ public class TaskController {
 	public List<TaskDTO> findAll() {
 		return service.findAll();
 	}
-	@GetMapping(value = "/{id}")
+	@GetMapping("/{id}")
 	public Optional<Task> findById(@PathVariable Long id) {
 		return service.findById(id);
 	}
