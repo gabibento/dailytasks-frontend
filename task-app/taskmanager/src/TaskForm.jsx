@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 const TaskForm = () => {
-    const [title, setTitle] = useState('');
-    const [completed, setCompleted] = useState(false);
+    const [task, setTask] = useState({
+        title: '',
+        completed: false,
+        categoryId: ''
+      });
+
+      const [categories, setCategories] = useState([]);
+    
+      useEffect(() => {
+        const fetchCategories = async () => {
+            try{
+                const response = await axios.get('http://localhost:8080/categories')
+                setCategories(response.data);
+            }catch (e) {
+                console.error(e)
+            }
+        }
+        fetchCategories()
+      }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const task = { title, completed };
 
         try {
             const response = await fetch('http://localhost:8080/tasks', {
@@ -25,6 +41,12 @@ const TaskForm = () => {
             console.error("Error:", error);
         }
     };
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setTask({
+            ...task, [name]: value
+        })
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -33,11 +55,22 @@ const TaskForm = () => {
                     Title:
                     <input
                         type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        value={task.title}
+                        name='title'
+                        onChange={handleChange}
                         required
                     />
                 </label>
+
+                <label>Category</label>
+
+               <select name='categoryId' value={task.categoryId} onChange={handleChange}>
+                <option value="">Select a category</option>
+
+                {categories.map((category) => (
+                    <option key={category.id} value={category.id}>{category.name}</option>
+                ))}
+               </select>
             </div>
            
             <button type="submit">Add Task</button>

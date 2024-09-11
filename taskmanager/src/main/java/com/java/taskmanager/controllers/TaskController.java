@@ -26,7 +26,7 @@ public class TaskController {
 	private TaskService service;
 	
 	@PostMapping
-	public TaskDTO insert(@RequestBody Task task) {
+	public TaskDTO insert(@RequestBody TaskDTO task) {
 		return service.insert(task);
 	}
 	@GetMapping
@@ -48,7 +48,9 @@ public class TaskController {
 		Task task = optionalTask.get();
 		task.setCompleted(!task.isCompleted());
 		
-		TaskDTO updatedTask = service.insert(task);
+		TaskDTO dto = new TaskDTO(task);
+		
+		TaskDTO updatedTask = service.insert(dto);
         return ResponseEntity.ok(updatedTask);
 	}
 	@DeleteMapping("/{id}")
