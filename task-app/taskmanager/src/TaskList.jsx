@@ -27,7 +27,7 @@ function TaskList() {
 
   const toggleTaskCompleted = async (taskId) => {
     try{
-        await axios.patch(`http://localhost:8080/tasks/${taskId}/completed`);
+        await axios.patch(`http://localhost:8080/tasks/${taskId}`);
 
         setTasks((prevTasks) =>
             prevTasks.map((task) =>
@@ -36,6 +36,16 @@ function TaskList() {
           )
     }catch (error) {
       console.error("Erro ao alternar o status da tarefa:", error);
+    }
+  }
+  const deleteById = async (taskId) => {
+    try{
+        await axios.delete(`http://localhost:8080/tasks/${taskId}`)
+        setTasks((prevTasks) =>
+            prevTasks.filter((task) => task.id != taskId)
+        );
+    }catch (error) {
+        console.error("Erro ao deletar a tarefa:", error);
     }
   }
 
@@ -48,8 +58,8 @@ function TaskList() {
           tasks.map((task) => (
             <li key={task.id}>
              <input type="checkbox" checked={task.completed} onChange={() => toggleTaskCompleted(task.id)}/>
-              <strong>{task.title}:</strong> 
-            
+              <strong>{task.title}</strong> 
+              <button onClick={() => deleteById(task.id)}>Delete</button>
             </li>
           ))
         ) : (

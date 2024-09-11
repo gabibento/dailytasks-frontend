@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +38,7 @@ public class TaskController {
 		return service.findById(id);
 	}
 	
-	@PatchMapping("/{id}/completed")
+	@PatchMapping("/{id}")
     public ResponseEntity<TaskDTO> toggleTaskCompleted(@PathVariable Long id) {
 		Optional<Task> optionalTask = service.findById(id);
 		
@@ -50,7 +51,10 @@ public class TaskController {
 		TaskDTO updatedTask = service.insert(task);
         return ResponseEntity.ok(updatedTask);
 	}
-	
+	@DeleteMapping("/{id}")
+	public void deleteById(@PathVariable Long id) {
+		service.deleteById(id);
+	}
 	
 	
 	
