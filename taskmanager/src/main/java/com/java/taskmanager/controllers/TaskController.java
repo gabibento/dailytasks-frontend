@@ -1,9 +1,12 @@
 package com.java.taskmanager.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +33,25 @@ public class TaskController {
 		return service.findAll();
 	}
 	@GetMapping(value = "/{id}")
-	public TaskDTO findById(@PathVariable Long id) {
+	public Optional<Task> findById(@PathVariable Long id) {
 		return service.findById(id);
 	}
+	
+	@PatchMapping("/{id}/completed")
+    public ResponseEntity<TaskDTO> toggleTaskCompleted(@PathVariable Long id) {
+		Optional<Task> optionalTask = service.findById(id);
+		
+		if(optionalTask.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		Task task = optionalTask.get();
+		task.setCompleted(!task.isCompleted());
+		
+		TaskDTO updatedTask = service.insert(task);
+        return ResponseEntity.ok(updatedTask);
+	}
+	
+	
+	
+	
 }

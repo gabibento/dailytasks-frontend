@@ -2,6 +2,7 @@ package com.java.taskmanager.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,10 +32,9 @@ public class TaskService {
 		return dtos;
 	}
 	@Transactional(readOnly = true)
-	public TaskDTO findById(Long id) {
-		Task entity = repository.findById(id).get();
-		TaskDTO dto = new TaskDTO(entity);
-		return dto;
+	public Optional<Task> findById(Long id) {
+		return Optional.ofNullable(repository.findById(id).get());
+		
 	}
 
 }
