@@ -30,5 +30,11 @@ public class TaskService {
 		tasks.forEach(task -> dtos.add(new TaskDTO(task)));
 		return dtos;
 	}
+	@Transactional(readOnly = true)
+	public TaskDTO findById(Long id) {
+		Task entity = repository.findById(id).get();
+		TaskDTO dto = new TaskDTO(entity);
+		return dto;
+	}
 
 }
