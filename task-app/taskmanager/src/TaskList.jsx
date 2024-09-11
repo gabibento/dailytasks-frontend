@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 function TaskList() {
-  const [tasks, setTasks] = useState([]); // Estado para armazenar as tasks
-  const [loading, setLoading] = useState(true); // Estado para indicar carregamento
-  const [error, setError] = useState(null); // Estado para tratar erros
+  const [tasks, setTasks] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
 
   useEffect(() => {
-    // Função para buscar as tasks do backend
+    
     const fetchTasks = async () => {
       try {
         const response = await fetch("http://localhost:8080/tasks", {
@@ -20,23 +20,22 @@ function TaskList() {
           throw new Error("Erro ao buscar tasks");
         }
 
-        const data = await response.json(); // Converte a resposta para JSON
-        setTasks(data); // Define o estado com as tasks recebidas
-        setLoading(false); // Carregamento concluído
+        const data = await response.json(); 
+        setTasks(data); 
+        setLoading(false); 
       } catch (error) {
         setError(error.message);
         setLoading(false);
       }
     };
 
-    fetchTasks(); // Chama a função ao montar o componente
-  }, []); // O array vazio [] garante que o fetch seja executado apenas uma vez ao montar o componente
+    fetchTasks(); 
+  }, []); 
 
-  // Renderização condicional para mostrar o carregamento ou erros
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>Erro: {error}</p>;
 
-  // Retorna uma lista de tasks
+
   return (
     <div>
       <h2>Lista de Tasks</h2>
@@ -44,7 +43,9 @@ function TaskList() {
         {tasks.length > 0 ? (
           tasks.map((task) => (
             <li key={task.id}>
-              <strong>{task.title}:</strong> {task.completed}
+             <input type="radio" checked={task.completed} readOnly/>
+              <strong>{task.title}:</strong> 
+            
             </li>
           ))
         ) : (
