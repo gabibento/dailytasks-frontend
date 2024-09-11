@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function TaskList() {
   const [tasks, setTasks] = useState([]); 
@@ -9,19 +10,8 @@ function TaskList() {
     
     const fetchTasks = async () => {
       try {
-        const response = await fetch("http://localhost:8080/tasks", {
-          method: "GET",
-          headers: {
-            "Accept": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Erro ao buscar tasks");
-        }
-
-        const data = await response.json(); 
-        setTasks(data); 
+        const response = await axios.get("http://localhost:8080/tasks");
+        setTasks(response.data);
         setLoading(false); 
       } catch (error) {
         setError(error.message);
@@ -35,6 +25,20 @@ function TaskList() {
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>Erro: {error}</p>;
 
+  const toggleTaskCompleted = async (taskId) => {
+    try{
+        await axios.patch(`http://localhost:8080/tasks/${taskId}/completed`);
+
+        setTasks((prevTasks) =>
+            prevTasks.map((task) =>
+              task.id === taskId ? { ...task, completed: !task.completed } : task
+            )
+          )
+    }catch (error) {
+      console.error("Erro ao alternar o status da tarefa:", error);
+    }
+  }
+
 
   return (
     <div>
@@ -43,7 +47,7 @@ function TaskList() {
         {tasks.length > 0 ? (
           tasks.map((task) => (
             <li key={task.id}>
-             <input type="radio" checked={task.completed} readOnly/>
+             <input type="checkbox" checked={task.completed} onChange={() => toggleTaskCompleted(task.id)}/>
               <strong>{task.title}:</strong> 
             
             </li>
