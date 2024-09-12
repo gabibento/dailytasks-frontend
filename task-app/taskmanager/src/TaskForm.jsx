@@ -5,7 +5,8 @@ const TaskForm = () => {
     const [task, setTask] = useState({
         title: '',
         completed: false,
-        categoryId: ''
+        categoryId: '',
+        date: ''
       });
 
       const [categories, setCategories] = useState([]);
@@ -24,6 +25,10 @@ const TaskForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+       
+        const formattedDate = new Date(task.date).toLocaleDateString('pt-BR'); // Formata a data para 'dd/MM/yyyy'
+
+        const taskToSend = { ...task, date: formattedDate };
 
         try {
             const response = await fetch('http://localhost:8080/tasks', {
@@ -31,7 +36,7 @@ const TaskForm = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(task),
+                body: JSON.stringify(taskToSend),
             });
             if (!response.ok) {
                 throw new Error("Failed to save task");
@@ -46,13 +51,13 @@ const TaskForm = () => {
         setTask({
             ...task, [name]: value
         })
+        console.log(value)
     }
 
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label>
-                    Title:
+                <label>Title:</label>
                     <input
                         type="text"
                         value={task.title}
@@ -60,9 +65,15 @@ const TaskForm = () => {
                         onChange={handleChange}
                         required
                     />
-                </label>
+                <label>Date:</label>
+                <input 
+                type="date"
+                value={task.date}
+                name='date'
+                onChange={handleChange}
+                />
 
-                <label>Category</label>
+                <label>Category:</label>
 
                <select name='categoryId' value={task.categoryId} onChange={handleChange}>
                 <option value="">Select a category</option>
