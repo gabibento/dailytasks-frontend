@@ -1,8 +1,8 @@
 package com.java.taskmanager.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,9 +51,8 @@ public class TaskService {
 	@Transactional(readOnly = true)
 	public List<TaskDTO> findAll() {
 		List<Task> tasks = taskRepository.findAll();
-		List<TaskDTO> dtos = new ArrayList<>();
-		tasks.forEach(task -> dtos.add(new TaskDTO(task)));
-		return dtos;
+		return tasks.stream().map((task) -> new TaskDTO(task)).collect(Collectors.toList());
+		
 	}
 
 	@Transactional(readOnly = true)
