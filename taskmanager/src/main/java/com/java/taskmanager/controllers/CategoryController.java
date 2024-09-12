@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.taskmanager.entities.Category;
-import com.java.taskmanager.services.CategoryService;
+import com.java.taskmanager.repositories.CategoryRepository;
 
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryController {
 	
 	@Autowired
-	private CategoryService service;
+	private CategoryRepository repository;
 	
 	@GetMapping
 	public List<Category> findAll(){
-		return service.findAll();
+		return repository.findAll();
 	}
 }
