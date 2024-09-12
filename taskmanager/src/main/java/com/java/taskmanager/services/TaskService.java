@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.java.taskmanager.dtos.TaskDTO;
 import com.java.taskmanager.entities.Category;
+import com.java.taskmanager.entities.Priority;
 import com.java.taskmanager.entities.Task;
 import com.java.taskmanager.repositories.CategoryRepository;
+import com.java.taskmanager.repositories.PriorityRepository;
 import com.java.taskmanager.repositories.TaskRepository;
 
 @Service
@@ -24,6 +26,9 @@ public class TaskService {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+	@Autowired 
+	private PriorityRepository priorityRepository;
 
 	public TaskDTO update(Task task) {
 		Task entity = taskRepository.save(task);
@@ -46,6 +51,13 @@ public class TaskService {
         Optional<Category> categoryOpt = categoryRepository.findById(dto.getCategoryId());
         if (categoryOpt.isPresent()) {
             task.setCategory(categoryOpt.get());
+        } else {
+            throw new RuntimeException("Category not found");
+        }
+        
+        Optional<Priority> priorityOpt = priorityRepository.findById(dto.getPriorityId());
+        if(priorityOpt.isPresent()) {
+        	task.setPriority(priorityOpt.get());
         } else {
             throw new RuntimeException("Category not found");
         }

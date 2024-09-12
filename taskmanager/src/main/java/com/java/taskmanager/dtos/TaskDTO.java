@@ -11,6 +11,8 @@ public class TaskDTO {
 	private boolean completed;
 	private Long categoryId;
 	private String categoryName;
+	private Long priorityId;
+	private String priorityName;
 	private String date;
 	
     static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -19,12 +21,14 @@ public class TaskDTO {
 
 	}
 	
-	public TaskDTO(Long id, String title, boolean completed, Long categoryId, String categoryName, LocalDate date) {
+	public TaskDTO(Long id, String title, boolean completed, Long categoryId, String categoryName, Long priorityId, String priorityName, LocalDate date) {
 		this.id = id;
 		this.title = title;
 		this.completed = completed;
 		this.categoryId = categoryId;
-		this.categoryName= categoryName; 
+		this.categoryName= categoryName;
+		this.priorityId = priorityId;
+		this.priorityName = priorityName;
 		this.date = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	}
 
@@ -34,6 +38,8 @@ public class TaskDTO {
 		completed = task.isCompleted();
 		categoryId = task.getCategory().getId();
 		categoryName = task.getCategory().getName();
+		priorityId = task.getPriority().getId();
+		priorityName = task.getPriority().getName();
 		date = task.getDate() != null ? task.getDate().format(FORMATTER) : null;
 	}
 	
@@ -70,6 +76,23 @@ public class TaskDTO {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+	
+
+	public Long getPriorityId() {
+		return priorityId;
+	}
+
+	public void setPriorityId(Long priorityId) {
+		this.priorityId = priorityId;
+	}
+
+	public String getPriorityName() {
+		return priorityName;
+	}
+
+	public void setPriorityName(String priorityName) {
+		this.priorityName = priorityName;
 	}
 
 	public String getDate() {

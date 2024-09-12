@@ -30,17 +30,22 @@ public class Task {
     @JoinColumn(name = "category_id")
 	private Category category;
 	
+	@ManyToOne
+    @JoinColumn(name = "priority_id")
+	private Priority priority;
+	
 	public Task() {
 	
 	}
 	
-	public Task(Long id, String title, boolean completed, Category category, LocalDate date) {
+	public Task(Long id, String title, boolean completed, Category category, LocalDate date, Priority priority) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.completed = completed;
 		this.category = category;
 		this.date = date;
+		this.priority = priority;
 	}
 	
 	public Long getId() {
@@ -76,6 +81,14 @@ public class Task {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
+	}
+
+	public Priority getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Priority priority) {
+		this.priority = priority;
 	}
 	
 	
