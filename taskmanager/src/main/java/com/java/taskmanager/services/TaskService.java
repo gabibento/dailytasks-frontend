@@ -1,5 +1,7 @@
 package com.java.taskmanager.services;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,8 +33,15 @@ public class TaskService {
 	public TaskDTO insert(TaskDTO dto) {
         
         Task task = new Task();
+        
         task.setTitle(dto.getTitle());
         task.setCompleted(dto.isCompleted());
+        
+        if (dto.getDate() != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate date = LocalDate.parse(dto.getDate(), formatter);
+            task.setDate(date); 
+        }
        
         Optional<Category> categoryOpt = categoryRepository.findById(dto.getCategoryId());
         if (categoryOpt.isPresent()) {

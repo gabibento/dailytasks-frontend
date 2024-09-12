@@ -25,7 +25,7 @@ public class TaskDTO {
 		this.completed = completed;
 		this.categoryId = categoryId;
 		this.categoryName= categoryName; 
-		this.date = date.format(DateTimeFormatter.ofPattern("dd/mm/yyyy"));
+		this.date = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	}
 
 	public TaskDTO(Task task) {
@@ -34,7 +34,7 @@ public class TaskDTO {
 		completed = task.isCompleted();
 		categoryId = task.getCategory().getId();
 		categoryName = task.getCategory().getName();
-		date = task.getDate().format(FORMATTER);
+		date = task.getDate() != null ? task.getDate().format(FORMATTER) : null;
 	}
 	
 	public Long getId() {
@@ -70,6 +70,14 @@ public class TaskDTO {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 	
