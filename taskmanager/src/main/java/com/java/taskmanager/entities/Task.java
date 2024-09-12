@@ -1,5 +1,7 @@
 package com.java.taskmanager.entities;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,23 +18,29 @@ public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(nullable = false)
 	private String title;
+	
 	private boolean completed;
+	
+	private LocalDate date;
+	
 	@ManyToOne
     @JoinColumn(name = "category_id")
 	private Category category;
 	
 	public Task() {
-		super();
+	
 	}
 	
-	public Task(Long id, String title, boolean completed, Category category) {
+	public Task(Long id, String title, boolean completed, Category category, LocalDate date) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.completed = completed;
 		this.category = category;
+		this.date = date;
 	}
 	
 	public Long getId() {
@@ -60,6 +68,14 @@ public class Task {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 	
 	

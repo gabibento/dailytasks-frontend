@@ -1,5 +1,8 @@
 package com.java.taskmanager.dtos;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import com.java.taskmanager.entities.Task;
 
 public class TaskDTO {
@@ -8,17 +11,21 @@ public class TaskDTO {
 	private boolean completed;
 	private Long categoryId;
 	private String categoryName;
+	private String date;
+	
+    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	public TaskDTO() {
 
 	}
 	
-	public TaskDTO(Long id, String title, boolean completed, Long categoryId, String categoryName) {
+	public TaskDTO(Long id, String title, boolean completed, Long categoryId, String categoryName, LocalDate date) {
 		this.id = id;
 		this.title = title;
 		this.completed = completed;
 		this.categoryId = categoryId;
 		this.categoryName= categoryName; 
+		this.date = date.format(DateTimeFormatter.ofPattern("dd/mm/yyyy"));
 	}
 
 	public TaskDTO(Task task) {
@@ -27,6 +34,7 @@ public class TaskDTO {
 		completed = task.isCompleted();
 		categoryId = task.getCategory().getId();
 		categoryName = task.getCategory().getName();
+		date = task.getDate().format(FORMATTER);
 	}
 	
 	public Long getId() {
