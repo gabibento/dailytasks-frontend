@@ -6,16 +6,20 @@ const TaskForm = () => {
         title: '',
         completed: false,
         categoryId: '',
-        date: ''
+        priorityId: '',
+        date: '',
       });
 
       const [categories, setCategories] = useState([]);
+      const [priorities, setPriorities] = useState([]);
     
       useEffect(() => {
         const fetchCategories = async () => {
             try{
                 const response = await axios.get('http://localhost:8080/categories')
+                const responsePriority = await axios.get('http://localhost:8080/priorities')
                 setCategories(response.data);
+                setPriorities(responsePriority.data)
             }catch (e) {
                 console.error(e)
             }
@@ -82,6 +86,17 @@ const TaskForm = () => {
                     <option key={category.id} value={category.id}>{category.name}</option>
                 ))}
                </select>
+
+               
+               <label>Priority:</label>
+
+                <select name='priorityId' value={task.priorityId} onChange={handleChange}>
+                  <option value="">Select a Priority</option>
+                  {priorities.map((priority) => (
+                    <option key={priority.id} value={priority.id}>{priority.name}</option>
+                ))}
+               </select>
+
             </div>
            
             <button type="submit">Add Task</button>

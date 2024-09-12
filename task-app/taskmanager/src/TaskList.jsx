@@ -61,6 +61,7 @@ function TaskList() {
               <strong>{task.title}</strong> 
               <p>{task.date}</p>
               <p>{task.categoryName}</p>
+              <p>{task.priorityName}</p>
               <button onClick={() => deleteById(task.id)}>Delete</button>
             </li>
           ))
