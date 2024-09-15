@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,8 +72,8 @@ public class TaskService {
 
 	@Transactional(readOnly = true)
 	public List<TaskDTO> findAll() {
-		List<Task> tasks = taskRepository.findAll();
-		return tasks.stream().map((task) -> new TaskDTO(task)).collect(Collectors.toList());
+		List<Task> tasks = taskRepository.findAll(Sort.by(Sort.Order.asc("priority"))); // Ordenar por prioridade
+		  return tasks.stream().map(TaskDTO::new).collect(Collectors.toList());
 		
 	}
 
