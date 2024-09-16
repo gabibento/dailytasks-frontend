@@ -10,15 +10,15 @@ const TaskForm = () => {
         date: '',
       });
 
-      const [categories, setCategories] = useState([]);
-      const [priorities, setPriorities] = useState([]);
+      const [categories, setCategories] = useState([])
+      const [priorities, setPriorities] = useState([])
     
       useEffect(() => {
         const fetchCategories = async () => {
             try{
                 const response = await axios.get('http://localhost:8080/categories')
                 const responsePriority = await axios.get('http://localhost:8080/priorities')
-                setCategories(response.data);
+                setCategories(response.data)
                 setPriorities(responsePriority.data)
             }catch (e) {
                 console.error(e)
@@ -30,8 +30,7 @@ const TaskForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
        
-        const formattedDate = new Date(task.date).toLocaleDateString('pt-BR'); // Formata a data para 'dd/MM/yyyy'
-
+        const formattedDate = new Date(task.date).toLocaleDateString('pt-BR'); 
         const taskToSend = { ...task, date: formattedDate };
 
         try {

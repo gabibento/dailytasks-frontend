@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Search from "./Search";
 
 function TaskList() {
   const [tasks, setTasks] = useState([]); 
+  const [allTasks, setAllTasks] = useState([])
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
 
@@ -12,6 +14,7 @@ function TaskList() {
       try {
         const response = await axios.get("http://localhost:8080/tasks");
         setTasks(response.data);
+        setAllTasks(response.data)
         setLoading(false); 
       } catch (error) {
         setError(error.message);
@@ -20,7 +23,7 @@ function TaskList() {
     };
 
     fetchTasks(); 
-  }, [tasks]); 
+  }, []); 
 
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>Erro: {error}</p>;
@@ -38,6 +41,7 @@ function TaskList() {
       console.error("Erro ao alternar o status da tarefa:", error);
     }
   }
+
   const deleteById = async (taskId) => {
     try{
         await axios.delete(`http://localhost:8080/tasks/${taskId}`)
@@ -49,10 +53,10 @@ function TaskList() {
     }
   }
 
-
   return (
     <div>
       <h2>Lista de Tasks</h2>
+      <Search tasks={tasks} setTasks={setTasks} allTasks={allTasks}></Search>
       <ul>
         {tasks.length > 0 ? (
           tasks.map((task) => (
