@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Search from "./Search";
+import Filter from "./Filter";
 
 function TaskList() {
   const [tasks, setTasks] = useState([]); 
@@ -57,6 +58,7 @@ function TaskList() {
     <div>
       <h2>Lista de Tasks</h2>
       <Search tasks={tasks} setTasks={setTasks} allTasks={allTasks}></Search>
+      <Filter tasks={tasks} setTasks={setTasks} allTasks={allTasks}></Filter>
       <ul>
         {tasks.length > 0 ? (
           tasks.map((task) => (
