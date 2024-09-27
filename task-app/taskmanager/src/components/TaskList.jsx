@@ -2,29 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Search from "./Search";
 import Filter from "./Filter";
+import { useFetchTasks } from "../hooks/useFetchTasks";
 
 function TaskList() {
-  const [tasks, setTasks] = useState([]); 
-  const [allTasks, setAllTasks] = useState([])
-  const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(null); 
-
-  useEffect(() => {
-    
-    const fetchTasks = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/tasks");
-        setTasks(response.data);
-        setAllTasks(response.data)
-        setLoading(false); 
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
-
-    fetchTasks(); 
-  }, []); 
+  const {tasks, setTasks, allTasks, loading, error} = useFetchTasks()
 
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>Erro: {error}</p>;
@@ -57,8 +38,7 @@ function TaskList() {
   return (
     <div>
       <h2>Lista de Tasks</h2>
-      <Search tasks={tasks} setTasks={setTasks} allTasks={allTasks}></Search>
-      <Filter tasks={tasks} setTasks={setTasks} allTasks={allTasks}></Filter>
+      
       <ul>
         {tasks.length > 0 ? (
           tasks.map((task) => (

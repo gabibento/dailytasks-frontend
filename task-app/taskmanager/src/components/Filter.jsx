@@ -1,28 +1,15 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useFetchCategoriesPriorities } from '../hooks/useFetchCategoriesPriorities';
 
-const Filter = ({tasks, setTasks, allTasks}) => {
-    const [categories, setCategories] = useState([])
-    const [priorities, setPriorities] = useState([])
+const Filter = ({ setTasks, allTasks}) => {
+   
     const [filters, setFilters] = useState({
         category: '',
         priority: '',
       });
 
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try{
-                const response = await axios.get('http://localhost:8080/categories')
-                const responsePriority = await axios.get('http://localhost:8080/priorities')
-                setCategories(response.data)
-                setPriorities(responsePriority.data)
-            }catch (e) {
-                console.error(e)
-            }
-        }
-        fetchCategories()
-      }, [])
+      const { categories, priorities} = useFetchCategoriesPriorities();
 
       const handleChange = (e) => {
         const { name, value } = e.target;

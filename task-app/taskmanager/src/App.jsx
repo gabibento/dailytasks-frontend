@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import TaskForm from './TaskForm'
-import TaskList from './TaskList'
+import TaskForm from './components/TaskForm'
+import Home from './components/Home'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
 
   return (
     <>
-      <TaskForm></TaskForm>
-      <TaskList></TaskList>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/createTask' element={<TaskForm/>}></Route>
+      </Routes>
+    </Router>
+    
     </>
   )
 }

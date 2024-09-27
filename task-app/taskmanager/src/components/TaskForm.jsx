@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useFetchCategoriesPriorities } from '../hooks/useFetchCategoriesPriorities';
 
 const TaskForm = () => {
     const [task, setTask] = useState({
@@ -10,22 +11,11 @@ const TaskForm = () => {
         date: '',
       });
 
-      const [categories, setCategories] = useState([])
-      const [priorities, setPriorities] = useState([])
+      const { categories, priorities, loading, error } = useFetchCategoriesPriorities();
+
+      if (loading) return <p>Carregando...</p>;
+      if (error) return <p>Erro ao carregar dados.</p>;
     
-      useEffect(() => {
-        const fetchCategories = async () => {
-            try{
-                const response = await axios.get('http://localhost:8080/categories')
-                const responsePriority = await axios.get('http://localhost:8080/priorities')
-                setCategories(response.data)
-                setPriorities(responsePriority.data)
-            }catch (e) {
-                console.error(e)
-            }
-        }
-        fetchCategories()
-      }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,21 +24,17 @@ const TaskForm = () => {
         const taskToSend = { ...task, date: formattedDate };
 
         try {
-            const response = await fetch('http://localhost:8080/tasks', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(taskToSend),
-            });
-            if (!response.ok) {
+            const response = await axios.post('http://localhost:8080/tasks', taskToSend)
+
+            if (response.status !== 200 && response.status !== 201) {
                 throw new Error("Failed to save task");
             }
-            console.log("Task saved successfully");
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    };
+          console.log("Task saved successfully")
+  
+          } catch (error) {
+              console.error("Error:", error);
+          }
+    }
     const handleChange = (e) => {
         const {name, value} = e.target;
         setTask({
