@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useFetchCategoriesPriorities } from '../hooks/useFetchCategoriesPriorities';
+import Dialog from '@mui/material/Dialog';
 
-const TaskForm = () => {
+const TaskForm = ({open, setOpen}) => {
     const [task, setTask] = useState({
         title: '',
         completed: false,
@@ -10,11 +11,15 @@ const TaskForm = () => {
         priorityId: '',
         date: '',
       });
-
+    
       const { categories, priorities, loading, error } = useFetchCategoriesPriorities();
 
       if (loading) return <p>Carregando...</p>;
       if (error) return <p>Erro ao carregar dados.</p>;
+
+      const handleClose = () => {
+        setOpen(false)
+      }
     
 
     const handleSubmit = async (e) => {
@@ -30,6 +35,7 @@ const TaskForm = () => {
                 throw new Error("Failed to save task");
             }
           console.log("Task saved successfully")
+          handleClose()
   
           } catch (error) {
               console.error("Error:", error);
@@ -44,7 +50,8 @@ const TaskForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <Dialog open={open} onClose={handleClose}>
+            <form onSubmit={handleSubmit}>
             <div>
                 <label>Title:</label>
                     <input
@@ -85,7 +92,9 @@ const TaskForm = () => {
             </div>
            
             <button type="submit">Add Task</button>
+            <button onClick={handleClose}>cancel</button>
         </form>
+        </Dialog>
     );
 };
 
