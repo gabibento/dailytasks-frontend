@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Search from "./Search";
-import Filter from "./Filter";
-import { useFetchTasks } from "../hooks/useFetchTasks";
 
-function TaskList() {
-  const {tasks, setTasks, allTasks, loading, error} = useFetchTasks()
+function TaskList({ tasks, setTasks, allTasks, loading, error }) {
 
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>Erro: {error}</p>;

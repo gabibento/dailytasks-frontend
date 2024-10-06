@@ -6,8 +6,8 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import TaskForm from './TaskForm';
 import { Box, IconButton } from '@mui/material';
 
-const HeaderBar = () => {
-    const {tasks, setTasks, allTasks} = useFetchTasks()
+const HeaderBar = ({ tasks, setTasks, allTasks}) => {
+    
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
