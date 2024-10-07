@@ -16,17 +16,21 @@ const HeaderBar = ({ tasks, setTasks, allTasks}) => {
    
   return (
     <header>
-        <Box sx={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center', 
-        p: 2,
-        m: 2 
-        }}>
-            <Search tasks={tasks} setTasks={setTasks} allTasks={allTasks}></Search>
+       <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          p: 2,
+          m: 2,
+        }}
+      >
+        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-start' }}>
+          <Search tasks={tasks} setTasks={setTasks} allTasks={allTasks} />
+        </Box>
 
             <IconButton onClick={handleClickOpen}>
-                    <AddCircleIcon sx={{ fontSize: 30 }} />
+                    <AddCircleIcon  sx={{ fontSize: { xs: 30, sm: 40, md: 40 } }}/>
             </IconButton>
                 {/* <Filter setTasks={setTasks} allTasks={allTasks}></Filter> */}
             <TaskForm setOpen={setOpen} open={open}></TaskForm>
