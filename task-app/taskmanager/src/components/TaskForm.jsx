@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useFetchCategoriesPriorities } from '../hooks/useFetchCategoriesPriorities';
 import { Dialog, Box, Button, TextField, MenuItem, FormControl, InputLabel, Select, Typography } from '@mui/material'
 
-const TaskForm = ({open, setOpen}) => {
+const TaskForm = ({open, setOpen, setTasks}) => {
     const [task, setTask] = useState({
         title: '',
         completed: false,
@@ -34,8 +34,9 @@ const TaskForm = ({open, setOpen}) => {
             if (response.status !== 200 && response.status !== 201) {
                 throw new Error("Failed to save task");
             }
-          console.log("Task saved successfully")
-          handleClose()
+            setTasks((prev) => [...prev, response.data])
+            console.log("Task saved successfully")
+            handleClose()
   
           } catch (error) {
               console.error("Error:", error);
@@ -46,7 +47,6 @@ const TaskForm = ({open, setOpen}) => {
         setTask({
             ...task, [name]: value
         })
-        console.log(value)
     }
 
     return (

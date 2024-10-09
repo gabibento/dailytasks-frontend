@@ -33,7 +33,7 @@ const HeaderBar = ({ tasks, setTasks, allTasks}) => {
                     <AddCircleIcon  sx={{ fontSize: { xs: 30, sm: 40, md: 40 } }}/>
             </IconButton>
                 {/* <Filter setTasks={setTasks} allTasks={allTasks}></Filter> */}
-            <TaskForm setOpen={setOpen} open={open}></TaskForm>
+            <TaskForm setOpen={setOpen} open={open} setTasks={setTasks}></TaskForm>
 
     </Box>
     </header>
