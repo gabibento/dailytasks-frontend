@@ -55,9 +55,6 @@ function TaskList({ tasks, setTasks, loading, error }) {
             <li
               key={task.id}
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between", // Adiciona espaço uniforme entre as colunas
                 padding: "15px",
                 marginBottom: "10px",
                 border: "1px solid #ccc",
@@ -66,56 +63,38 @@ function TaskList({ tasks, setTasks, loading, error }) {
                 transition: "box-shadow 0.2s",
               }}
             >
-              {/* Checkbox */}
-              <Checkbox
-                checked={task.completed}
-                onChange={() => toggleTaskCompleted(task.id)}
-                sx={{ flexShrink: 0 }}
-              />
+              <Box display="flex" alignItems="center" justifyContent="space-between">
+                {/* Checkbox */}
+                <Checkbox
+                  checked={task.completed}
+                  onChange={() => toggleTaskCompleted(task.id)}
+                />
 
-              {/* Detalhes da tarefa */}
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  flexGrow: 1,
-                  marginLeft: 2,
-                }}
-              >
-                {/* Título da tarefa */}
-                <Typography variant="subtitle1" sx={{ marginBottom: 0.5 }}>
-                  {task.title}
-                </Typography>
+                {/* Título, Categoria e Data */}
+                <Box sx={{ flexGrow: 1, marginLeft: 2 }}>
+                  <Typography variant="subtitle1" sx={{ marginBottom: 0.5 }}>
+                    {task.title}
+                  </Typography>
 
-                {/* Data, Categoria e Botão de Deletar */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center", // Alinha todos verticalmente no centro
-                    marginTop: 1,
-                  }}
-                >
-                  <Box sx={{ display: "flex", gap: 2 }}>
-                    <Typography variant="body2">{task.date}</Typography>
-                    <Typography variant="body2">{task.categoryName}</Typography>
+                  <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Box display="flex" gap={2}>
+                      <Typography variant="body2">{task.date}</Typography>
+                      <Typography variant="body2">{task.categoryName}</Typography>
+                    </Box>
+                    {/* IconButton e FlagIcon alinhados verticalmente */}
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <IconButton
+                        color="grey"
+                        onClick={() => deleteById(task.id)}
+                        sx={{ padding: 0 }}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                      <FlagIcon sx={{ color: getPriorityColor(task.priorityName) }} />
+                    </Box>
                   </Box>
-
-                  <IconButton
-                    color="error"
-                    onClick={() => deleteById(task.id)}
-                    sx={{ padding: 0 }}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
                 </Box>
-                <FlagIcon sx={{ color: getPriorityColor(task.priorityName) }} />
               </Box>
-
-              {/* Ícone de Prioridade */}
-            
-               
-              
             </li>
           ))
         ) : (
