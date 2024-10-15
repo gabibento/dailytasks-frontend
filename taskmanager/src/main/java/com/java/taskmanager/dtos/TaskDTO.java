@@ -1,8 +1,7 @@
 package com.java.taskmanager.dtos;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.java.taskmanager.entities.Task;
 
 public class TaskDTO {
@@ -13,9 +12,8 @@ public class TaskDTO {
 	private String categoryName;
 	private Long priorityId;
 	private String priorityName;
-	private String date;
-	
-    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate date;
 	
 	public TaskDTO() {
 
@@ -29,7 +27,7 @@ public class TaskDTO {
 		this.categoryName= categoryName;
 		this.priorityId = priorityId;
 		this.priorityName = priorityName;
-		this.date = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		this.date = date;
 	}
 
 	public TaskDTO(Task task) {
@@ -40,7 +38,7 @@ public class TaskDTO {
 		categoryName = task.getCategory().getName();
 		priorityId = task.getPriority().getId();
 		priorityName = task.getPriority().getName();
-		date = task.getDate() != null ? task.getDate().format(FORMATTER) : null;
+		date = task.getDate() != null ? task.getDate() : null;
 	}
 	
 	public Long getId() {
@@ -95,11 +93,11 @@ public class TaskDTO {
 		this.priorityName = priorityName;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 	
