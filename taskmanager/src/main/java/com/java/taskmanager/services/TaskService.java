@@ -31,12 +31,47 @@ public class TaskService {
     @Autowired 
     private PriorityRepository priorityRepository;
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
     public TaskDTO update(Task task) {
         Task entity = taskRepository.save(task);
         return new TaskDTO(entity);
     }
+    public TaskDTO update(Long id, TaskDTO dto) {
+        // Verificar se a tarefa existe
+        Optional<Task> optionalTask = taskRepository.findById(id);
+        if (optionalTask.isEmpty()) {
+            throw new RuntimeException("Task not found");
+        }
+
+        Task task = optionalTask.get();
+        
+        // Atualizar os campos da tarefa com os dados fornecidos no DTO
+        task.setTitle(dto.getTitle());
+        
+        if (dto.getDate() != null) {
+            task.setDate(dto.getDate());
+        }
+
+        // Atualizar categoria
+        Optional<Category> categoryOpt = categoryRepository.findById(dto.getCategoryId());
+        if (categoryOpt.isPresent()) {
+            task.setCategory(categoryOpt.get());
+        } else {
+            throw new RuntimeException("Category not found");
+        }
+
+        // Atualizar prioridade
+        Optional<Priority> priorityOpt = priorityRepository.findById(dto.getPriorityId());
+        if (priorityOpt.isPresent()) {
+            task.setPriority(priorityOpt.get());
+        } else {
+            throw new RuntimeException("Priority not found");
+        }
+
+        // Salvar as alterações
+        task = taskRepository.save(task);
+        return new TaskDTO(task);
+    }
+
 
     public TaskDTO insert(TaskDTO dto) {
         Task task = new Task();
@@ -66,6 +101,7 @@ public class TaskService {
         task = taskRepository.save(task);
         return new TaskDTO(task);
     }
+    
 
     @Transactional(readOnly = true)
     public List<TaskDTO> findAll() {

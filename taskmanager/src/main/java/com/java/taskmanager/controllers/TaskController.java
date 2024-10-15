@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,6 +53,15 @@ public class TaskController {
 		TaskDTO updatedTask = service.update(task);
         return ResponseEntity.ok(updatedTask);
 	}
+	  @PutMapping("/{id}")
+	    public ResponseEntity<TaskDTO> updateTask(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
+	        try {
+	            TaskDTO updatedTask = service.update(id, taskDTO);
+	            return ResponseEntity.ok(updatedTask);
+	        } catch (RuntimeException e) {
+	            return ResponseEntity.notFound().build(); // Task não encontrada
+	        }
+	    }
 	@DeleteMapping("/{id}")
 	public void deleteById(@PathVariable Long id) {
 		service.deleteById(id);

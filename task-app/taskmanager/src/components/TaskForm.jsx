@@ -1,10 +1,10 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFetchCategoriesPriorities } from '../hooks/useFetchCategoriesPriorities';
 import { Dialog, Box, Button, TextField, MenuItem, FormControl, InputLabel, Select, Typography } from '@mui/material';
 import dayjs from 'dayjs'; // Importando dayjs para manipulação de datas
 
-const TaskForm = ({ open, setOpen, setTasks }) => {
+const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
   const [task, setTask] = useState({
     title: '',
     completed: false,
@@ -12,6 +12,18 @@ const TaskForm = ({ open, setOpen, setTasks }) => {
     priorityId: '',
     date: '',
   });
+
+  useEffect(() => {
+    if (taskToEdit) {
+      setTask({
+        title: taskToEdit.title,
+        completed: taskToEdit.completed,
+        categoryId: taskToEdit.categoryId,
+        priorityId: taskToEdit.priorityId,
+        date: dayjs(taskToEdit.date).format('YYYY-MM-DD'),
+      });
+    }
+  }, [taskToEdit]);
 
   const { categories, priorities, loading, error } = useFetchCategoriesPriorities();
 
@@ -25,17 +37,26 @@ const TaskForm = ({ open, setOpen, setTasks }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Formatando a data corretamente usando dayjs
     const formattedDate = dayjs(task.date).format('YYYY-MM-DD'); 
     const taskToSend = { ...task, date: formattedDate };
 
     try {
-      const response = await axios.post('http://localhost:8080/tasks', taskToSend);
+      let response;
+      if (taskToEdit) {
+        response = await axios.put(`http://localhost:8080/tasks/${taskToEdit.id}`, taskToSend);
+      } else {
+        response = await axios.post('http://localhost:8080/tasks', taskToSend);
+      }
 
       if (response.status !== 200 && response.status !== 201) {
         throw new Error("Failed to save task");
       }
-      setTasks((prev) => [...prev, response.data]);
+      setTasks((prev) => 
+        taskToEdit ? 
+        prev.map((t) => (t.id === taskToEdit.id ? response.data : t)) 
+        : [...prev, response.data]
+      );
+
       console.log("Task saved successfully");
       handleClose();
 
@@ -70,9 +91,9 @@ const TaskForm = ({ open, setOpen, setTasks }) => {
         }}
       >
         <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '600px' }}> 
-          {/* Título do Formulário */}
+        
           <Typography variant="h5" component="h2" align="center" sx={{ mb: 3 }}>
-            Create Task
+            {taskToEdit ? "Edit Task" : "New Task"}
           </Typography>
 
           <Box 
@@ -149,11 +170,11 @@ const TaskForm = ({ open, setOpen, setTasks }) => {
 
             {/* Botões */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
-              <Button type="submit" variant="contained" color="primary" fullWidth>
-                Add Task
-              </Button>
               <Button onClick={handleClose} variant="outlined" color="secondary" fullWidth>
                 Cancel
+              </Button>
+              <Button type="submit" variant="contained" color="primary" fullWidth>
+                Add Task
               </Button>
             </Box>
           </Box>

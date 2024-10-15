@@ -1,9 +1,10 @@
 import { Box, Checkbox, IconButton, Typography } from "@mui/material";
 import FlagIcon from '@mui/icons-material/Flag';
 import DeleteIcon from '@mui/icons-material/Delete';
-import dayjs from 'dayjs'; // Import dayjs
+import EditIcon from '@mui/icons-material/Edit'
+import dayjs from 'dayjs'; 
 
-const TaskItem = ({ task, toggleTaskCompleted, deleteById, getPriorityColor }) => {
+const TaskItem = ({ task, toggleTaskCompleted, deleteById, getPriorityColor, handleEdit }) => {
    
     return(
     <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ height: "13vh" }}>
@@ -24,6 +25,9 @@ const TaskItem = ({ task, toggleTaskCompleted, deleteById, getPriorityColor }) =
                 </Box>
 
                 <Box display="flex" alignItems="center" gap={1}>
+                    <IconButton color="grey" onClick={() => handleEdit(task)} sx={{ padding: 0 }}>
+                        <EditIcon /> 
+                    </IconButton>
                     <IconButton color="grey" onClick={() => deleteById(task.id)} sx={{ padding: 0 }}>
                         <DeleteIcon />
                     </IconButton>

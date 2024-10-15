@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Box, Typography, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import TaskItem from "./TaskItem";
+import TaskForm from "./TaskForm";
 import { useState } from "react";
 import dayjs from "dayjs";  
 
@@ -8,6 +9,8 @@ function TaskList({ tasks, setTasks, loading, error }) {
   const [filterCategory, setFilterCategory] = useState("");
   const [filterPriority, setFilterPriority] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
+  const [openTaskForm, setOpenTaskForm] = useState(false); 
+  const [taskToEdit, setTaskToEdit] = useState(null);
 
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>Erro: {error}</p>;
@@ -23,6 +26,10 @@ function TaskList({ tasks, setTasks, loading, error }) {
     } catch (error) {
       console.error("Erro ao alternar o status da tarefa:", error);
     }
+  };
+  const handleEdit = (task) => {
+    setTaskToEdit(task); 
+    setOpenTaskForm(true); 
   };
 
   const deleteById = async (taskId) => {
@@ -153,7 +160,14 @@ function TaskList({ tasks, setTasks, loading, error }) {
           {overdueTasks.length > 0 ? (
             overdueTasks.map((task) => (
               <li key={task.id} style={taskStyle} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
-                <TaskItem task={task} toggleTaskCompleted={toggleTaskCompleted} deleteById={deleteById} getPriorityColor={getPriorityColor} />
+                <TaskItem  
+                  key={task.id} 
+                  task={task} 
+                  toggleTaskCompleted={toggleTaskCompleted} 
+                  deleteById={deleteById} 
+                  getPriorityColor={getPriorityColor}
+                  handleEdit={handleEdit}
+                />
               </li>
             ))
           ) : (
@@ -169,7 +183,14 @@ function TaskList({ tasks, setTasks, loading, error }) {
           {todayTasks.length > 0 ? (
             todayTasks.map((task) => (
               <li key={task.id} style={taskStyle} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
-                <TaskItem task={task} toggleTaskCompleted={toggleTaskCompleted} deleteById={deleteById} getPriorityColor={getPriorityColor} />
+                <TaskItem  
+                  key={task.id} 
+                  task={task} 
+                  toggleTaskCompleted={toggleTaskCompleted} 
+                  deleteById={deleteById} 
+                  getPriorityColor={getPriorityColor}
+                  handleEdit={handleEdit}
+                />
               </li>
             ))
           ) : (
@@ -185,7 +206,14 @@ function TaskList({ tasks, setTasks, loading, error }) {
           {upcomingTasks.length > 0 ? (
             upcomingTasks.map((task) => (
               <li key={task.id} style={taskStyle} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
-                <TaskItem task={task} toggleTaskCompleted={toggleTaskCompleted} deleteById={deleteById} getPriorityColor={getPriorityColor} />
+                <TaskItem  
+                  key={task.id} 
+                  task={task} 
+                  toggleTaskCompleted={toggleTaskCompleted} 
+                  deleteById={deleteById} 
+                  getPriorityColor={getPriorityColor}
+                  handleEdit={handleEdit}
+                />
               </li>
             ))
           ) : (
@@ -193,6 +221,14 @@ function TaskList({ tasks, setTasks, loading, error }) {
           )}
         </ul>
       </Box>
+      {openTaskForm && (
+        <TaskForm 
+          open={openTaskForm} 
+          setOpen={setOpenTaskForm} 
+          taskToEdit={taskToEdit} 
+          setTasks={setTasks}
+        />
+      )}
     </div>
   );
 }
