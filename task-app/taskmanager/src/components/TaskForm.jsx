@@ -27,9 +27,6 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
 
   const { categories, priorities, loading, error } = useFetchCategoriesPriorities();
 
-  if (loading) return <p>Carregando...</p>;
-  if (error) return <p>Erro ao carregar dados.</p>;
-
   const handleClose = () => {
     setOpen(false);
   };
