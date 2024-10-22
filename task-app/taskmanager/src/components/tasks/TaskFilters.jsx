@@ -5,7 +5,7 @@ const TaskFilters = ({ filterCategory, setFilterCategory, filterPriority, setFil
     <Box display="flex" justifyContent="center" marginBottom={2} sx={{ gap: { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 } }}>
 
       <FormControl sx={{ minWidth: { xs: "100px", sm: "130px", md: "150px" }, height: "40px" }}>
-        <InputLabel sx={{ top: "-6px", textAlign: "center", fontSize: "14px" }}>Category</InputLabel>
+        <InputLabel sx={{ top: "-6px", textAlign: "center", fontSize: "14px"}}>Category</InputLabel>
         <Select value={filterCategory} 
         onChange={(e) => setFilterCategory(e.target.value)}  
         sx={{ height: "40px", borderRadius: "8px" }} >

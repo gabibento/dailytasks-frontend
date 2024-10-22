@@ -30,7 +30,7 @@ const HeaderBar = ({ tasks, setTasks, allTasks}) => {
         </Box>
 
             <IconButton onClick={handleClickOpen}>
-                    <AddCircleIcon  sx={{ fontSize: { xs: 30, sm: 40, md: 40 }, color: "#ff8fa0" }}/>
+              <AddCircleIcon  sx={{ fontSize: { xs: 30, sm: 40, md: 40 }, color: "#ff8fa0" }}/>
             </IconButton>
   
             <TaskForm setOpen={setOpen} open={open} setTasks={setTasks}></TaskForm>
