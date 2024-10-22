@@ -47,10 +47,10 @@ function TaskList({ tasks, setTasks, loading, error }) {
 
   const getPriorityColor = (priorityName) => {
     switch (priorityName.toLowerCase()) {
-      case "high": return "red";
-      case "medium": return "orange";
-      case "low": return "yellow";
-      default: return "grey";
+      case "high": return "#d32f2f";
+      case "medium": return "#ff9800";
+      case "low": return "#FFBA3A";
+      default: return "primary";
     }
   };
 
@@ -69,6 +69,20 @@ function TaskList({ tasks, setTasks, loading, error }) {
 
   return (
     <div>
+      <Typography
+        variant="h4"
+        color="primary"
+        sx={{
+          textAlign: "center",
+          fontWeight: "bold",
+          marginBottom: "20px", 
+          fontSize: { xs: "1.8rem", sm: "2rem", md: "2.2rem", lg: "2.5rem" },
+          textTransform: "uppercase",
+        }}
+      >
+        To Do List
+      </Typography>
+
       <TaskFilters
         filterCategory={filterCategory}
         setFilterCategory={setFilterCategory}
@@ -81,7 +95,7 @@ function TaskList({ tasks, setTasks, loading, error }) {
         <TaskSection 
           title="Overdue" 
           tasks={overdueTasks} 
-          color="#f44336" 
+          color="#d32f2f" 
           emptyMessage="No overdue tasks."
           toggleTaskCompleted={toggleTaskCompleted}
           deleteById={deleteById}
@@ -91,7 +105,7 @@ function TaskList({ tasks, setTasks, loading, error }) {
         <TaskSection 
           title="Today" 
           tasks={todayTasks} 
-          color="#4caf50" 
+          color="#ff9800" 
           emptyMessage="No tasks for today."
           toggleTaskCompleted={toggleTaskCompleted}
           deleteById={deleteById}
@@ -101,7 +115,7 @@ function TaskList({ tasks, setTasks, loading, error }) {
         <TaskSection 
           title="Upcoming" 
           tasks={upcomingTasks} 
-          color="#2196f3" 
+          color="#FFBA3A" 
           emptyMessage="No upcoming tasks."
           toggleTaskCompleted={toggleTaskCompleted}
           deleteById={deleteById}

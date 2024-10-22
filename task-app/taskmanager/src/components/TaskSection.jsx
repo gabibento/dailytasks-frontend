@@ -2,8 +2,8 @@ import { Typography } from "@mui/material";
 import TaskItem from "./TaskItem";
 
 const TaskSection = ({ title, tasks, color, emptyMessage, toggleTaskCompleted, deleteById, getPriorityColor, handleEdit }) => (
-  <div>
-    <Typography variant="h6" sx={{ marginBottom: "10px", color: color, fontWeight: "bold", textAlign: "center" }}>
+  <div style={{ width: "90%", maxWidth: "900px", margin: "30px auto" }}>
+    <Typography variant="h6" sx={{ color: color, fontWeight: "bold" }}>
       {title}
     </Typography>
     <ul style={{ listStyleType: "none", padding: 0 }}>
@@ -31,12 +31,9 @@ const taskStyle = {
   padding: "15px",
   border: "1px solid #ddd",
   borderRadius: "12px",
-  backgroundColor: "#f9f9f9",
   boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
   transition: "box-shadow 0.3s ease-in-out",
-  width: "90%",
-  maxWidth: "900px",
-  margin: "30px auto",
+  marginBottom: "30px",
 };
 
 const onMouseOver = (e) => {

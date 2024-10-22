@@ -2,7 +2,7 @@ import React from 'react'
 import { Input, Box, InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-const Search = ({tasks, setTasks, allTasks}) => {
+const Search = ({ setTasks, allTasks}) => {
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -19,7 +19,7 @@ const Search = ({tasks, setTasks, allTasks}) => {
         <TextField
          fullWidth
          sx={{
-           maxWidth: { xs: '65%', sm: '60%', md: '70%', lg: '70%' },
+           maxWidth: { xs: '65%', sm: '60%', md: '50%' },
            '& .MuiInputBase-input': {
             padding: '8px 12px',
             fontSize: { xs: '14px', sm: '16px', md: '18px' }, 
@@ -28,7 +28,7 @@ const Search = ({tasks, setTasks, allTasks}) => {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon />
+                <SearchIcon color='primary'/>
               </InputAdornment>
             ),
           }}

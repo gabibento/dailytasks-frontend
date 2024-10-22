@@ -7,9 +7,9 @@ import dayjs from 'dayjs';
 const TaskItem = ({ task, toggleTaskCompleted, deleteById, getPriorityColor, handleEdit }) => {
    
     return(
-    <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ height: "13vh" }}>
+    <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ height: { sm: "10vh", md: "12vh", lg: "15vh"} }}>
     
-        <Checkbox checked={task.completed} onChange={() => toggleTaskCompleted(task.id)} />
+        <Checkbox checked={task.completed} onChange={() => toggleTaskCompleted(task.id)}/>
 
         <Box sx={{ flexGrow: 1, marginLeft: 2 }}>
 
@@ -25,10 +25,10 @@ const TaskItem = ({ task, toggleTaskCompleted, deleteById, getPriorityColor, han
                 </Box>
 
                 <Box display="flex" alignItems="center" gap={1}>
-                    <IconButton color="grey" onClick={() => handleEdit(task)} sx={{ padding: 0 }}>
+                    <IconButton color="primary" onClick={() => handleEdit(task)} sx={{ padding: 0 }}>
                         <EditIcon /> 
                     </IconButton>
-                    <IconButton color="grey" onClick={() => deleteById(task.id)} sx={{ padding: 0 }}>
+                    <IconButton color="primary" onClick={() => deleteById(task.id)} sx={{ padding: 0 }}>
                         <DeleteIcon />
                     </IconButton>
                     <FlagIcon sx={{ color: getPriorityColor(task.priorityName) }} />

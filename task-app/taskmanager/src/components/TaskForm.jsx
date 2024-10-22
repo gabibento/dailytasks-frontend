@@ -89,7 +89,7 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
       >
         <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '600px' }}> 
         
-          <Typography variant="h5" component="h2" align="center" sx={{ mb: 3 }}>
+          <Typography variant="h5" component="h2" align="center" sx={{ mb: 3, textTransform: "uppercase" }} color='primary'>
             {taskToEdit ? "Edit Task" : "New Task"}
           </Typography>
 
@@ -118,6 +118,7 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
                 value={task.date}
                 name="date"
                 onChange={handleChange}
+                required
                 fullWidth
                 InputLabelProps={{ shrink: true }}
                 variant="outlined"
@@ -126,7 +127,7 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
 
             {/* Categoria e Prioridade */}
             <Box sx={{ display: 'flex', gap: 2 }}>
-              <FormControl fullWidth>
+              <FormControl fullWidth required>
                 <InputLabel>Category</InputLabel>
                 <Select
                   value={task.categoryId}
@@ -145,7 +146,7 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
                 </Select>
               </FormControl>
 
-              <FormControl fullWidth>
+              <FormControl fullWidth required> 
                 <InputLabel>Priority</InputLabel>
                 <Select
                   value={task.priorityId}
@@ -167,10 +168,10 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
 
             {/* Botões */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
-              <Button onClick={handleClose} variant="outlined" color="secondary" fullWidth>
+              <Button onClick={handleClose} variant="outlined" color="primary" fullWidth>
                 Cancel
               </Button>
-              <Button type="submit" variant="contained" color="primary" fullWidth>
+              <Button type="submit" variant="contained" color="primary" sx={{ color: "white" }} fullWidth>
                 Add Task
               </Button>
             </Box>
