@@ -6,12 +6,16 @@ export const useFetchTasks = () => {
     const [allTasks, setAllTasks] = useState([])
     const [loading, setLoading] = useState(true); 
     const [error, setError] = useState(null); 
+
+    const api = axios.create({
+      baseURL: import.meta.env.BACKEND_URL
+    });
   
     useEffect(() => {
     
         const fetchTasks = async () => {
           try {
-            const response = await axios.get("http://localhost:8080/tasks");
+            const response = await api.get("/tasks");
             setTasks(response.data);
             setAllTasks(response.data)
             setLoading(false); 

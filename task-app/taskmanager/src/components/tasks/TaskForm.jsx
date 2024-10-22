@@ -13,6 +13,10 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
     date: '',
   });
 
+  const api = axios.create({
+    baseURL: import.meta.env.BACKEND_URL
+  });
+
   useEffect(() => {
     if (taskToEdit) {
       setTask({
@@ -40,9 +44,9 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
     try {
       let response;
       if (taskToEdit) {
-        response = await axios.put(`http://localhost:8080/tasks/${taskToEdit.id}`, taskToSend);
+        response = await api.put(`/tasks/${taskToEdit.id}`, taskToSend);
       } else {
-        response = await axios.post('http://localhost:8080/tasks', taskToSend);
+        response = await axios.post('/tasks', taskToSend);
       }
 
       if (response.status !== 200 && response.status !== 201) {

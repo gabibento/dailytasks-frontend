@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Box, InputAdornment, TextField } from '@mui/material';
+import { Box, InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Search = ({ setTasks, allTasks}) => {

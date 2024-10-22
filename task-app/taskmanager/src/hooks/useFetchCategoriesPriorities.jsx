@@ -7,11 +7,15 @@ export const useFetchCategoriesPriorities = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const api = axios.create({
+    baseURL: import.meta.env.BACKEND_URL
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseCategories = await axios.get('http://localhost:8080/categories');
-        const responsePriorities = await axios.get('http://localhost:8080/priorities');
+        const responseCategories = await api.get('/categories');
+        const responsePriorities = await api.get('/priorities');
         setCategories(responseCategories.data);
         setPriorities(responsePriorities.data);
       } catch (e) {

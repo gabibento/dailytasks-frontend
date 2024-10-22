@@ -14,13 +14,17 @@ function TaskList({ tasks, setTasks, loading, error }) {
   const [openTaskForm, setOpenTaskForm] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
 
+  const api = axios.create({
+    baseURL: import.meta.env.BACKEND_URL
+  });
+
   if (loading) return <Box display="flex" justifyContent="center" minHeight="400px"><CircularProgress /></Box>;
 
   if (error) return <ErrorMessage error={error} />;
 
   const toggleTaskCompleted = async (taskId) => {
     try {
-      await axios.patch(`http://localhost:8080/tasks/${taskId}`);
+      await axios.patch(`/tasks/${taskId}`);
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
           task.id === taskId ? { ...task, completed: !task.completed } : task
@@ -38,7 +42,7 @@ function TaskList({ tasks, setTasks, loading, error }) {
 
   const deleteById = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:8080/tasks/${taskId}`);
+      await axios.delete(`/tasks/${taskId}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
     } catch (error) {
       console.error("Erro ao deletar a tarefa:", error);
