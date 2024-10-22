@@ -15,7 +15,7 @@ function TaskList({ tasks, setTasks, loading, error }) {
   const [taskToEdit, setTaskToEdit] = useState(null);
 
   const api = axios.create({
-    baseURL: import.meta.env.BACKEND_URL
+    baseURL: import.meta.env.VITE_BACKEND_URL
   });
 
   if (loading) return <Box display="flex" justifyContent="center" minHeight="400px"><CircularProgress /></Box>;
