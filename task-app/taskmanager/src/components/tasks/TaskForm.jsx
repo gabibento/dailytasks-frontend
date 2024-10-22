@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useFetchCategoriesPriorities } from '../hooks/useFetchCategoriesPriorities';
+import { useFetchCategoriesPriorities } from '../../hooks/useFetchCategoriesPriorities';
 import { Dialog, Box, Button, TextField, MenuItem, FormControl, InputLabel, Select, Typography } from '@mui/material';
 import dayjs from 'dayjs'; // Importando dayjs para manipulação de datas
 

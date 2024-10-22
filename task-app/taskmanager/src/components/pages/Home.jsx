@@ -1,7 +1,7 @@
 import React from 'react'
-import TaskList from './TaskList'
-import HeaderBar from './HeaderBar'
-import { useFetchTasks } from '../hooks/useFetchTasks'
+import TaskList from '../tasks/TaskList'
+import HeaderBar from '../ui/HeaderBar'
+import { useFetchTasks } from '../../hooks/useFetchTasks'
 
 const Home = () => {
 

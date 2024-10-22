@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import TaskFilters from "./TaskFilters";
 import TaskSection from "./TaskSection";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "../ui/ErrorMessage";
 import TaskForm from "./TaskForm";
 
 function TaskList({ tasks, setTasks, loading, error }) {

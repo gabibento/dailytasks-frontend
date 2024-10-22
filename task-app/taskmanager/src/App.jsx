@@ -1,5 +1,5 @@
-import TaskForm from './components/TaskForm';
-import Home from './components/Home';
+import TaskForm from './components/tasks/TaskForm';
+import Home from './components/pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 

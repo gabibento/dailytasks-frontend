@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Search from './Search'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import TaskForm from './TaskForm';
+import TaskForm from '../tasks/TaskForm';
 import { Box, IconButton } from '@mui/material';
 
 const HeaderBar = ({ tasks, setTasks, allTasks}) => {
