@@ -1,8 +1,8 @@
-import axios from 'axios';
+import api from '../../services/api';
 import React, { useState, useEffect } from 'react';
 import { useFetchCategoriesPriorities } from '../../hooks/useFetchCategoriesPriorities';
 import { Dialog, Box, Button, TextField, MenuItem, FormControl, InputLabel, Select, Typography } from '@mui/material';
-import dayjs from 'dayjs'; // Importando dayjs para manipulação de datas
+import dayjs from 'dayjs'; 
 
 const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
   const [task, setTask] = useState({
@@ -11,10 +11,6 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
     categoryId: '',
     priorityId: '',
     date: '',
-  });
-
-  const api = axios.create({
-    baseURL: import.meta.env.VITE_BACKEND_URL
   });
 
   useEffect(() => {
@@ -29,7 +25,7 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
     }
   }, [taskToEdit]);
 
-  const { categories, priorities, loading, error } = useFetchCategoriesPriorities();
+  const { categories, priorities } = useFetchCategoriesPriorities();
 
   const handleClose = () => {
     setOpen(false);
@@ -46,7 +42,7 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
       if (taskToEdit) {
         response = await api.put(`/tasks/${taskToEdit.id}`, taskToSend);
       } else {
-        response = await axios.post('/tasks', taskToSend);
+        response = await api.post('/tasks', taskToSend);
       }
 
       if (response.status !== 200 && response.status !== 201) {

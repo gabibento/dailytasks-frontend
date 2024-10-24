@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import dayjs from "dayjs";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import TaskFilters from "./TaskFilters";
@@ -14,17 +14,13 @@ function TaskList({ tasks, setTasks, loading, error }) {
   const [openTaskForm, setOpenTaskForm] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
 
-  const api = axios.create({
-    baseURL: import.meta.env.VITE_BACKEND_URL
-  });
-
   if (loading) return <Box display="flex" justifyContent="center" minHeight="400px"><CircularProgress /></Box>;
 
   if (error) return <ErrorMessage error={error} />;
 
   const toggleTaskCompleted = async (taskId) => {
     try {
-      await axios.patch(`/tasks/${taskId}`);
+      await api.patch(`/tasks/${taskId}`);
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
           task.id === taskId ? { ...task, completed: !task.completed } : task
@@ -42,7 +38,7 @@ function TaskList({ tasks, setTasks, loading, error }) {
 
   const deleteById = async (taskId) => {
     try {
-      await axios.delete(`/tasks/${taskId}`);
+      await api.delete(`/tasks/${taskId}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
     } catch (error) {
       console.error("Erro ao deletar a tarefa:", error);
@@ -58,13 +54,14 @@ function TaskList({ tasks, setTasks, loading, error }) {
     }
   };
 
-  const filteredTasks = tasks.filter((task) => {
+  const filteredTasks = Array.isArray(tasks) ? tasks.filter((task) => {
     return (
       (filterCategory === "" || task.categoryName === filterCategory) &&
       (filterPriority === "" || task.priorityName.toLowerCase() === filterPriority.toLowerCase()) &&
       (filterStatus === "" || (filterStatus === "completed" ? task.completed : !task.completed))
     );
-  });
+  }) : [];
+  
 
   const today = dayjs().startOf('day');  
   const overdueTasks = filteredTasks.filter(task => dayjs(task.date).isBefore(today));
