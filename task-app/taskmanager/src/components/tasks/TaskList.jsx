@@ -7,7 +7,7 @@ import TaskSection from "./TaskSection";
 import ErrorMessage from "../ui/ErrorMessage";
 import TaskForm from "./TaskForm";
 
-function TaskList({ tasks, setTasks, loading, error }) {
+function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
   const [filterCategory, setFilterCategory] = useState("");
   const [filterPriority, setFilterPriority] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
@@ -128,6 +128,7 @@ function TaskList({ tasks, setTasks, loading, error }) {
         <TaskForm 
           open={openTaskForm} 
           setOpen={setOpenTaskForm} 
+          setAllTasks={setAllTasks}
           taskToEdit={taskToEdit} 
           setTasks={setTasks}
         />

@@ -5,12 +5,12 @@ import { useFetchTasks } from '../../hooks/useFetchTasks'
 
 const Home = () => {
 
-  const {tasks, setTasks, allTasks, loading, error} = useFetchTasks()
+  const {tasks, setTasks, allTasks, setAllTasks, loading, error} = useFetchTasks()
 
   return (
     <div>
-        <HeaderBar tasks={tasks} setTasks={setTasks} allTasks={allTasks}></HeaderBar>
-        <TaskList tasks={tasks} setTasks={setTasks} loading={loading} error={error}></TaskList>
+        <HeaderBar tasks={tasks} setTasks={setTasks} allTasks={allTasks} setAllTasks={setAllTasks}></HeaderBar>
+        <TaskList tasks={tasks} setTasks={setTasks} setAllTasks={setAllTasks} loading={loading} error={error}></TaskList>
     </div>
   )
 }

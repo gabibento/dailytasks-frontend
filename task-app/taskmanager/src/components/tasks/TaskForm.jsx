@@ -4,7 +4,7 @@ import { useFetchCategoriesPriorities } from '../../hooks/useFetchCategoriesPrio
 import { Dialog, Box, Button, TextField, MenuItem, FormControl, InputLabel, Select, Typography } from '@mui/material';
 import dayjs from 'dayjs'; 
 
-const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
+const TaskForm = ({ open, setOpen, setTasks, setAllTasks, taskToEdit }) => {
   const [task, setTask] = useState({
     title: '',
     completed: false,
@@ -52,7 +52,13 @@ const TaskForm = ({ open, setOpen, setTasks, taskToEdit }) => {
         taskToEdit ? 
         prev.map((t) => (t.id === taskToEdit.id ? response.data : t)) 
         : [...prev, response.data]
-      );
+      )
+
+      setAllTasks((prev) => 
+        taskToEdit ? 
+        prev.map((t) => (t.id === taskToEdit.id ? response.data : t)) 
+        : [...prev, response.data]
+      )
 
       console.log("Task saved successfully");
       handleClose();

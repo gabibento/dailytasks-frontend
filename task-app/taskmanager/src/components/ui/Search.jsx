@@ -6,8 +6,7 @@ const Search = ({ setTasks, allTasks}) => {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    console.log("search alltasks" + allTasks)
-
+   
     if(value == ''){
       setTasks(allTasks)
     }else{

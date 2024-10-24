@@ -4,7 +4,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import TaskForm from '../tasks/TaskForm';
 import { Box, IconButton } from '@mui/material';
 
-const HeaderBar = ({ tasks, setTasks, allTasks}) => {
+const HeaderBar = ({ tasks, setTasks, allTasks, setAllTasks }) => {
     
     const [open, setOpen] = useState(false);
 
@@ -33,7 +33,7 @@ const HeaderBar = ({ tasks, setTasks, allTasks}) => {
               <AddCircleIcon  sx={{ fontSize: { xs: 30, sm: 40, md: 40 }, color: "#ff8fa0" }}/>
             </IconButton>
   
-            <TaskForm setOpen={setOpen} open={open} setTasks={setTasks}></TaskForm>
+            <TaskForm setOpen={setOpen} open={open} setTasks={setTasks} setAllTasks={setAllTasks}></TaskForm>
 
     </Box>
     </header>
