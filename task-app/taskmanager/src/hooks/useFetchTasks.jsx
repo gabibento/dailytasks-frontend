@@ -22,6 +22,7 @@ export const useFetchTasks = () => {
         };
     
         fetchTasks(); 
+        console.log(allTasks)
       }, []); 
 
   return {tasks, setTasks, allTasks, loading, error}
