@@ -10,7 +10,7 @@ function App() {
         main: "#ff8fa0",
       },
       secondary: {
-        main: "#f8a7b1"
+        main: "#6E6E6E"
       },
       priority: {
         high: "#d32f2f",

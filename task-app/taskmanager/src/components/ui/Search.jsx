@@ -21,13 +21,13 @@ const Search = ({ setTasks, allTasks}) => {
          sx={{
            maxWidth: { xs: '65%', sm: '60%', md: '50%' },
            '& .MuiInputBase-input': {
-            padding: '8px 12px',
+            padding: '8px 5px',
             fontSize: { xs: '14px', sm: '16px', md: '18px' }, 
           }
          }}
           InputProps={{
             startAdornment: (
-              <InputAdornment position="start">
+              <InputAdornment>
                 <SearchIcon color='primary'/>
               </InputAdornment>
             ),

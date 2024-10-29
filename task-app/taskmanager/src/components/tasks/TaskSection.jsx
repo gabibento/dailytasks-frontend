@@ -1,9 +1,9 @@
 import { Typography } from "@mui/material";
 import TaskItem from "./TaskItem";
 
-const TaskSection = ({ title, tasks, color, emptyMessage, toggleTaskCompleted, deleteById, getPriorityColor, handleEdit }) => (
+const TaskSection = ({ title, tasks, emptyMessage, toggleTaskCompleted, deleteById, getPriorityColor, handleEdit }) => (
   <div style={{ width: "90%", maxWidth: "900px", margin: "30px auto" }}>
-    <Typography variant="h6" sx={{ color: color, fontWeight: "bold" }}>
+    <Typography variant="h6" color="secondary" fontWeight={"normal"} textTransform={"uppercase"}>
       {title}
     </Typography>
     <ul style={{ listStyleType: "none", padding: 0 }}>

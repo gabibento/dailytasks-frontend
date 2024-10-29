@@ -96,7 +96,6 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
         <TaskSection 
           title="Overdue" 
           tasks={overdueTasks} 
-          color="#d32f2f" 
           emptyMessage="No overdue tasks."
           toggleTaskCompleted={toggleTaskCompleted}
           deleteById={deleteById}
@@ -106,7 +105,6 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
         <TaskSection 
           title="Today" 
           tasks={todayTasks} 
-          color="#ff9800" 
           emptyMessage="No tasks for today."
           toggleTaskCompleted={toggleTaskCompleted}
           deleteById={deleteById}
@@ -116,7 +114,6 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
         <TaskSection 
           title="Upcoming" 
           tasks={upcomingTasks} 
-          color="#FFBA3A" 
           emptyMessage="No upcoming tasks."
           toggleTaskCompleted={toggleTaskCompleted}
           deleteById={deleteById}

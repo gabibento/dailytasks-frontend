@@ -13,15 +13,15 @@ const TaskItem = ({ task, toggleTaskCompleted, deleteById, getPriorityColor, han
 
         <Box sx={{ flexGrow: 1, marginLeft: 2 }}>
 
-        <Typography variant="subtitle1" sx={{ marginBottom: 2.5 }}>
+        <Typography variant="h6" sx={{ marginBottom: 2.5, fontWeight: "normal" }} color="primary">
             {task.title}
         </Typography>
 
             <Box display="flex" justifyContent="space-between" alignItems="center">
 
                 <Box display="flex" gap={2}>
-                    <Typography variant="body2">{dayjs(task.date).format('DD/MM/YYYY')}</Typography>
-                    <Typography variant="body2">{task.categoryName}</Typography>
+                    <Typography color="secondary" variant="body2">{dayjs(task.date).format('DD/MM/YYYY')}</Typography>
+                    <Typography color="secondary" variant="body2">{task.categoryName}</Typography>
                 </Box>
 
                 <Box display="flex" alignItems="center" gap={1}>
