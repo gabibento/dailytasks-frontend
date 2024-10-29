@@ -10,8 +10,11 @@ function App() {
         main: "#ff8fa0",
       },
       secondary: {
-        main: "#8C8C8C"
-      }
+        main: "#8C8C8C",
+      },
+    },
+    typography: {
+      fontFamily: 'Montserrat, sans-serif', // Altere a fonte aqui
     },
   });
 

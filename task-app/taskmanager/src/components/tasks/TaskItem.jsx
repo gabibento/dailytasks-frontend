@@ -9,11 +9,12 @@ const TaskItem = ({ task, toggleTaskCompleted, deleteById, getPriorityColor, han
     return(
     <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ height: { sm: "10vh", md: "12vh", lg: "15vh"} }}>
     
-        <Checkbox checked={task.completed} onChange={() => toggleTaskCompleted(task.id)}/>
+        <Checkbox checked={task.completed} onChange={() => toggleTaskCompleted(task.id)} 
+             sx={{ '&.MuiCheckbox-root': { transform: 'scale(1.2)' } }} />
 
         <Box sx={{ flexGrow: 1, marginLeft: 2 }}>
 
-        <Typography variant="h6" sx={{ marginBottom: 2.5, fontWeight: "normal" }} color="primary">
+        <Typography variant="h6" sx={{ marginBottom: 2.5, fontWeight: "bold", textTransform: "uppercase" }} color="primary">
             {task.title}
         </Typography>
 
