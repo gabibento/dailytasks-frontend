@@ -47,9 +47,9 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
 
   const getPriorityColor = (priorityName) => {
     switch (priorityName.toLowerCase()) {
-      case "high": return "#d32f2f";
-      case "medium": return "#ff9800";
-      case "low": return "#FFBA3A";
+      case "high": return "#ff6659";
+      case "medium": return "#ffb74d";
+      case "low": return "#fdd835";
       default: return "primary";
     }
   };

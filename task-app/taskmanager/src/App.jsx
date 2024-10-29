@@ -10,13 +10,7 @@ function App() {
         main: "#ff8fa0",
       },
       secondary: {
-        main: "#6E6E6E"
-      },
-      priority: {
-        high: "#d32f2f",
-        medium: "#ff9800",
-        low: "#ffeb3b",
-        default: "#9e9e9e",
+        main: "#8C8C8C"
       }
     },
   });
