@@ -3,20 +3,20 @@ Bem-vindo ao repositório do frontend do TaskPlan, uma aplicação de listas de 
 
 🔗 [Repositório do Backend](https://github.com/gabibento/taskplan-backend)
 
-🔗 Acesse o Projeto em funcionamento aqui: [TaskPlan](https://task-manager-nsc1-git-main-gabriellas-projects-bb68f8bb.vercel.app/)
+🔗 Acesse o Projeto em funcionamento: [TaskPlan](https://task-manager-nsc1-git-main-gabriellas-projects-bb68f8bb.vercel.app/)
 
 ## 🚀 Funcionalidades
-- Criação de tarefas: Interface para adicionar novas tarefas com título, categoria, prioridade e data de vencimento.
-- Visualização das tarefas: Exibe a lista de todas as tarefas registradas.
-- Edição de tarefas: Interface para modificar dados de tarefas existentes.
-- Filtragem de tarefas: Filtros por categoria, prioridade e status (concluída/não concluída).
-- Busca de tarefas: Localize tarefas específicas pelo título.
-- Classificação de tarefas: Organização das tarefas em seções como "Vencidas", "Hoje" e "Próximas" com base na data de vencimento e prioridade.
+- **Criação de tarefas:** Interface para adicionar novas tarefas com título, categoria, prioridade e data de vencimento.
+- **Visualização das tarefas:** Exibe a lista de todas as tarefas registradas.
+- **Edição de tarefas:** Interface para modificar dados de tarefas existentes.
+- **Filtragem de tarefas:** Filtros por categoria, prioridade e status (concluída/não concluída).
+- **Busca de tarefas**: Localiza tarefas específicas pelo título.
+- **Classificação de tarefas:** Organização das tarefas em seções como "Vencidas", "Hoje" e "Próximas" com base na data de vencimento e ordenadas por prioridade.
 
 ## 🛠️ Tecnologias Utilizadas no Frontend
-- React: Biblioteca JavaScript para criação de interfaces de usuário.
-- Axios: Biblioteca para requisições HTTP, conectando o frontend ao backend.
-- Material-UI: Biblioteca de componentes para estilização e melhoria da experiência de usuário.
+- **React:** Biblioteca JavaScript para criação de interfaces de usuário.
+- **Axios:** Biblioteca para requisições HTTP, conectando o frontend ao backend.
+- **Material-UI:** Biblioteca de componentes para estilização e melhoria da experiência de usuário.
 
 ## 💬 Feedback e Contribuição
 Obrigada por visitar este repositório! Feedbacks e sugestões são bem-vindos. Contribua com melhorias, abra uma Issue ou envie um Pull Request!
