@@ -1,9 +1,9 @@
-# TaskPlan - Frontend
-Bem-vindo ao repositório do frontend do TaskPlan, uma aplicação de listas de tarefas (To-Do List) com funcionalidades de CRUD, desenvolvida com React, Vite e Material-UI para aprendizado e prática em desenvolvimento de interfaces dinâmicas.
+# DailyTasks - Frontend
+Bem-vindo ao repositório do frontend do DailyTasks, uma aplicação de listas de tarefas (To-Do List) com funcionalidades de CRUD, desenvolvida com React, Vite e Material-UI para aprendizado e prática em desenvolvimento de interfaces dinâmicas.
 
 🔗 [Repositório do Backend](https://github.com/gabibento/taskplan-backend)
 
-🔗 Acesse o Projeto em funcionamento: [TaskPlan](https://task-manager-nsc1-git-main-gabriellas-projects-bb68f8bb.vercel.app/)
+🔗 Acesse o Projeto em funcionamento: [DailyTasks](https://task-manager-nsc1-git-main-gabriellas-projects-bb68f8bb.vercel.app/)
 
 ## 🚀 Funcionalidades
 - **Criação de tarefas:** Interface para adicionar novas tarefas com título, categoria, prioridade e data de vencimento.
