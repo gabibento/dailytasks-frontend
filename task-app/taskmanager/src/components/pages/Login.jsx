@@ -16,9 +16,6 @@ const Login = () => {
       const token = response.data; 
       localStorage.setItem("authToken", token); 
 
-      console.log(token); 
-      console.log(localStorage.getItem("authToken"));
-
       navigate("/");
     } catch (err) {
       setError("Username or password invalid");

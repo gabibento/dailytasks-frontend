@@ -41,7 +41,7 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
         )
       );
     } catch (error) {
-      console.error("Erro ao alternar o status da tarefa:", error);
+      if(process.env.NODE_ENV !== 'production') console.error("Erro ao alternar o status da tarefa:", error);
     }
   };
 
@@ -55,7 +55,7 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
       await api.delete(`/tasks/${taskId}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
     } catch (error) {
-      console.error("Erro ao deletar a tarefa:", error);
+      if(process.env.NODE_ENV !== 'production') console.error("Erro ao deletar a tarefa:", error);
     }
   };
 

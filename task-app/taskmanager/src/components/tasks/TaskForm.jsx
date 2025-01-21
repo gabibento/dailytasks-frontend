@@ -13,7 +13,7 @@ const TaskForm = ({ open, setOpen, setTasks, setAllTasks, taskToEdit }) => {
     priorityId: '',
     date: '',
   });
-  const [submitting, setSubmitting] = useState(false); // Estado para controlar o carregamento durante o envio
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (taskToEdit) {
@@ -70,10 +70,9 @@ const TaskForm = ({ open, setOpen, setTasks, setAllTasks, taskToEdit }) => {
           : [...prev, response.data]
       );
 
-      console.log("Task saved successfully");
       handleClose();
     } catch (error) {
-      console.error("Error:", error);
+      if(process.env.NODE_ENV !== 'production') console.error("Error:", error);
     } finally {
       setSubmitting(false); 
     }
