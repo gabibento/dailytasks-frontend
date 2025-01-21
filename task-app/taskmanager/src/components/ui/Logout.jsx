@@ -4,14 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const Logout = () => {
-    const [open, setOpen] = useState(false); // Estado para controlar o Dialog
+    const [open, setOpen] = useState(false); 
     const navigate = useNavigate();
   
     const handleLogout = () => {
-      // Remove o token do localStorage
       localStorage.removeItem('authToken');
   
-      // Redireciona para a página de login
       navigate('/login');
     };
   
@@ -32,12 +30,12 @@ const Logout = () => {
         >
           <DialogContent>
             <DialogContentText id="logout-dialog-description">
-              Tem certeza de que deseja sair?
+                Are you sure you want to log out?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpen(false)} color="secondary">
-              Cancelar
+              Cancel
             </Button>
             <Button onClick={handleLogout} color="primary" autoFocus>
               Logout
