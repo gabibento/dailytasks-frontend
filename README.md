@@ -79,6 +79,3 @@ Obrigada por visitar este repositório! Feedbacks e sugestões são bem-vindos. 
 
 Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.  
 
----
-
-Se houver algo mais para ajustar, é só falar! 😊
