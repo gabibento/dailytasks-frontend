@@ -103,7 +103,8 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
         sx={{
           textAlign: "center",
           fontWeight: "bold",
-          marginBottom: "20px",
+          marginBottom: "30px",
+          marginTop: "10px",
           fontSize: { xs: "1.8rem", sm: "2rem", md: "2.2rem", lg: "2.5rem" },
           textTransform: "uppercase",
         }}
