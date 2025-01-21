@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import { Box, TextField, Button, Typography, Link } from "@mui/material";
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -12,11 +12,11 @@ const Login = ({ onLogin }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("/auth/login", { username, password }); // Endpoint de login no backend
-      const token = response.data; // Supondo que o token JWT vem no campo 'token'
-      localStorage.setItem("authToken", token); // Armazena o token no localStorage
+      const response = await api.post("/auth/login", { username, password }); 
+      const token = response.data; 
+      localStorage.setItem("authToken", token); 
 
-      console.log(token); // Confirme o que o backend retorna
+      console.log(token); 
       console.log(localStorage.getItem("authToken"));
 
       navigate("/");
@@ -78,7 +78,7 @@ const Login = ({ onLogin }) => {
             Don't have an account?{" "}
             <Link
               component="button"
-              variant="body2"
+              variant="body1"
               onClick={() => navigate("/signup")}
             >
               Sign Up
