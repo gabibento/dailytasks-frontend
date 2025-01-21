@@ -10,8 +10,10 @@ export const useFetchCategoriesPriorities = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseCategories = await api.get('/categories');
-        const responsePriorities = await api.get('/priorities');
+        const [responseCategories, responsePriorities] = await Promise.all([
+          api.get('/categories'),
+          api.get('/priorities')
+        ]);
         setCategories(responseCategories.data);
         setPriorities(responsePriorities.data);
       } catch (e) {

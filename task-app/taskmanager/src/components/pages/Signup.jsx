@@ -7,19 +7,19 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setLoading(true)
+
     try {
       await api.post("/auth/register", { username, password }); 
       const response = await api.post("/auth/login", { username, password });
       const token = response.data; 
       localStorage.setItem("authToken", token); 
-
-      console.log(token); 
-      console.log(localStorage.getItem("authToken"));
-
+      
       navigate("/");
     } catch (err) {
         if(err.response.status === 400){
@@ -27,7 +27,9 @@ const Signup = () => {
         }else{
             setError("An error occurred. Please try again.");
         }
-    }
+    } finally {
+        setLoading(false); 
+      }
   };
   return (
       <Box
@@ -96,7 +98,7 @@ const Signup = () => {
                sx={{ color: "white", fontSize: "1.1rem" }}
                fullWidth
              >
-               Sign up
+                {loading ? "Creating..." : "Sign Up"}
              </Button>
              {error && (
                <Typography

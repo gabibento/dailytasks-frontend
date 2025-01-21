@@ -14,7 +14,21 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
   const [openTaskForm, setOpenTaskForm] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
 
-  if (loading) return <Box display="flex" justifyContent="center" minHeight="400px"><CircularProgress /></Box>;
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 9999,
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   if (error) return <ErrorMessage error={error} />;
 
@@ -47,26 +61,39 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
 
   const getPriorityColor = (priorityName) => {
     switch (priorityName.toLowerCase()) {
-      case "high": return "#ff6659";
-      case "medium": return "#ffb74d";
-      case "low": return "#fdd835";
-      default: return "primary";
+      case "high":
+        return "#ff6659";
+      case "medium":
+        return "#ffb74d";
+      case "low":
+        return "#fdd835";
+      default:
+        return "primary";
     }
   };
 
-  const filteredTasks = Array.isArray(tasks) ? tasks.filter((task) => {
-    return (
-      (filterCategory === "" || task.categoryName === filterCategory) &&
-      (filterPriority === "" || task.priorityName.toLowerCase() === filterPriority.toLowerCase()) &&
-      (filterStatus === "" || (filterStatus === "completed" ? task.completed : !task.completed))
-    );
-  }) : [];
-  
+  const filteredTasks = Array.isArray(tasks)
+    ? tasks.filter((task) => {
+        return (
+          (filterCategory === "" || task.categoryName === filterCategory) &&
+          (filterPriority === "" ||
+            task.priorityName.toLowerCase() === filterPriority.toLowerCase()) &&
+          (filterStatus === "" ||
+            (filterStatus === "completed" ? task.completed : !task.completed))
+        );
+      })
+    : [];
 
-  const today = dayjs().startOf('day');  
-  const overdueTasks = filteredTasks.filter(task => dayjs(task.date).isBefore(today));
-  const todayTasks = filteredTasks.filter(task => dayjs(task.date).isSame(today, 'day'));
-  const upcomingTasks = filteredTasks.filter(task => dayjs(task.date).isAfter(today));
+  const today = dayjs().startOf("day");
+  const overdueTasks = filteredTasks.filter((task) =>
+    dayjs(task.date).isBefore(today)
+  );
+  const todayTasks = filteredTasks.filter((task) =>
+    dayjs(task.date).isSame(today, "day")
+  );
+  const upcomingTasks = filteredTasks.filter((task) =>
+    dayjs(task.date).isAfter(today)
+  );
 
   return (
     <div>
@@ -76,7 +103,7 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
         sx={{
           textAlign: "center",
           fontWeight: "bold",
-          marginBottom: "20px", 
+          marginBottom: "20px",
           fontSize: { xs: "1.8rem", sm: "2rem", md: "2.2rem", lg: "2.5rem" },
           textTransform: "uppercase",
         }}
@@ -93,27 +120,27 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
         setFilterStatus={setFilterStatus}
       />
       <Box>
-        <TaskSection 
-          title="Overdue" 
-          tasks={overdueTasks} 
+        <TaskSection
+          title="Overdue"
+          tasks={overdueTasks}
           emptyMessage="No overdue tasks."
           toggleTaskCompleted={toggleTaskCompleted}
           deleteById={deleteById}
           getPriorityColor={getPriorityColor}
           handleEdit={handleEdit}
         />
-        <TaskSection 
-          title="Today" 
-          tasks={todayTasks} 
+        <TaskSection
+          title="Today"
+          tasks={todayTasks}
           emptyMessage="No tasks for today."
           toggleTaskCompleted={toggleTaskCompleted}
           deleteById={deleteById}
           getPriorityColor={getPriorityColor}
           handleEdit={handleEdit}
         />
-        <TaskSection 
-          title="Upcoming" 
-          tasks={upcomingTasks} 
+        <TaskSection
+          title="Upcoming"
+          tasks={upcomingTasks}
           emptyMessage="No upcoming tasks."
           toggleTaskCompleted={toggleTaskCompleted}
           deleteById={deleteById}
@@ -121,15 +148,14 @@ function TaskList({ tasks, setTasks, setAllTasks, loading, error }) {
           handleEdit={handleEdit}
         />
       </Box>
-      {openTaskForm && (
-        <TaskForm 
-          open={openTaskForm} 
-          setOpen={setOpenTaskForm} 
-          setAllTasks={setAllTasks}
-          taskToEdit={taskToEdit} 
-          setTasks={setTasks}
-        />
-      )}
+
+      <TaskForm
+        open={openTaskForm}
+        setOpen={setOpenTaskForm}
+        setAllTasks={setAllTasks}
+        taskToEdit={taskToEdit}
+        setTasks={setTasks}
+      />
     </div>
   );
 }

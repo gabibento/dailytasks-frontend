@@ -1,6 +1,7 @@
 import TaskForm from './components/tasks/TaskForm';
 import Home from './components/pages/Home';
 import Login from './components/pages/Login';
+import Signup from './components/pages/Signup';
 import ProtectedRoute from './components/ProtectedRoute';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -34,6 +35,7 @@ function App() {
           }
         />
           <Route path='/createTask' element={<TaskForm />} />
+          <Route path='/signup' element={<Signup/>}/>
         </Routes>
       </Router>
     </ThemeProvider>
