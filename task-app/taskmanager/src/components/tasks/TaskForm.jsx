@@ -29,6 +29,14 @@ const TaskForm = ({ open, setOpen, setTasks, setAllTasks, taskToEdit }) => {
 
   const handleClose = () => {
     setOpen(false);
+
+    setTask({
+      title: '',
+      completed: false,
+      categoryId: '',
+      priorityId: '',
+      date: '',
+    });
   };
 
   const handleSubmit = async (e) => {
