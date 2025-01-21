@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Search from './Search'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import TaskForm from '../tasks/TaskForm';
+import Logout from './Logout';
 import { Box, IconButton } from '@mui/material';
 
 const HeaderBar = ({ tasks, setTasks, allTasks, setAllTasks }) => {
@@ -29,12 +30,14 @@ const HeaderBar = ({ tasks, setTasks, allTasks, setAllTasks }) => {
           <Search tasks={tasks} setTasks={setTasks} allTasks={allTasks} />
         </Box>
 
-            <IconButton onClick={handleClickOpen}>
-              <AddCircleIcon color='primary' sx={{ fontSize: { xs: 30, sm: 40, md: 40 } }}/>
-            </IconButton>
+        <IconButton onClick={handleClickOpen}>
+            <AddCircleIcon color='primary' sx={{ fontSize: { xs: 30, sm: 40, md: 40 } }}/>
+        </IconButton>
   
-            <TaskForm setOpen={setOpen} open={open} setTasks={setTasks} setAllTasks={setAllTasks}></TaskForm>
-
+        <TaskForm setOpen={setOpen} open={open} setTasks={setTasks} setAllTasks={setAllTasks}></TaskForm>
+      
+        <Logout/>
+        
     </Box>
     </header>
   )
