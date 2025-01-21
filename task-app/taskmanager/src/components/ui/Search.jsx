@@ -25,13 +25,15 @@ const Search = ({ setTasks, allTasks}) => {
             fontSize: { xs: '14px', sm: '16px', md: '18px' }, 
           }
          }}
-          InputProps={{
+         slotProps={{
+          input: {
             startAdornment: (
-              <InputAdornment>
-                <SearchIcon color='primary'/>
+              <InputAdornment position="start">
+                <SearchIcon color='primary' />
               </InputAdornment>
             ),
-          }}
+          },
+        }}
           onChange={handleChange} 
         />
     </Box>

@@ -5,6 +5,7 @@ import { Dialog, Box, Button, TextField, MenuItem, FormControl, InputLabel, Sele
 import dayjs from 'dayjs'; 
 
 const TaskForm = ({ open, setOpen, setTasks, setAllTasks, taskToEdit }) => {
+  const { categories, priorities } = useFetchCategoriesPriorities();
   const [task, setTask] = useState({
     title: '',
     completed: false,
@@ -25,7 +26,6 @@ const TaskForm = ({ open, setOpen, setTasks, setAllTasks, taskToEdit }) => {
     }
   }, [taskToEdit]);
 
-  const { categories, priorities } = useFetchCategoriesPriorities();
 
   const handleClose = () => {
     setOpen(false);
@@ -75,7 +75,7 @@ const TaskForm = ({ open, setOpen, setTasks, setAllTasks, taskToEdit }) => {
       [name]: value,
     });
   };
-
+ 
   return (
     <Dialog 
       open={open} 

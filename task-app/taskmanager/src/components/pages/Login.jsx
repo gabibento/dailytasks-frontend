@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../services/api'
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await api.post('/auth/login', { username, password }); // Endpoint de login no backend
-      const token = response.data.token; // Supondo que o token JWT vem no campo 'token'
+      const token = response.data; // Supondo que o token JWT vem no campo 'token'
       localStorage.setItem('authToken', token); // Armazena o token no localStorage
-      onLogin(); // Chama uma função para atualizar o estado de autenticação
+
+      console.log(token); // Confirme o que o backend retorna
+      console.log(localStorage.getItem('authToken'))
+      
+      navigate('/')
     } catch (err) {
       setError('Username or password invalid');
     }

@@ -1,5 +1,7 @@
 import TaskForm from './components/tasks/TaskForm';
 import Home from './components/pages/Home';
+import Login from './components/pages/Login';
+import ProtectedRoute from './components/ProtectedRoute';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -14,7 +16,7 @@ function App() {
       },
     },
     typography: {
-      fontFamily: 'Montserrat, sans-serif', // Altere a fonte aqui
+      fontFamily: 'Montserrat, sans-serif', 
     },
   });
 
@@ -22,7 +24,15 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path='/' element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
           <Route path='/createTask' element={<TaskForm />} />
         </Routes>
       </Router>
