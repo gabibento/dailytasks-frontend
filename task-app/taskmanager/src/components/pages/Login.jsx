@@ -4,18 +4,21 @@ import api from "../../services/api";
 import { Box, TextField, Button, Typography, Link } from "@mui/material";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("/auth/login", { username, password }); 
-      const token = response.data; 
-      localStorage.setItem("authToken", token); 
-
+      const response = await api.post("/auth/login", formData);
+      const token = response.data;
+      localStorage.setItem("authToken", token);
       navigate("/");
     } catch (err) {
       setError("Invalid credentials. Please try again.");
@@ -52,9 +55,9 @@ const Login = () => {
         >
           <TextField
             label="Username"
-            value={username}
             name="username"
-            onChange={(e) => setUsername(e.target.value)}
+            value={formData.username}
+            onChange={handleChange}
             required
             fullWidth
             variant="outlined"
@@ -62,10 +65,10 @@ const Login = () => {
 
           <TextField
             label="Password"
-            value={password}
             name="password"
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
+            value={formData.password}
+            onChange={handleChange}
             required
             fullWidth
             variant="outlined"
