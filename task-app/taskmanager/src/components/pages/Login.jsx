@@ -18,7 +18,7 @@ const Login = () => {
 
       navigate("/");
     } catch (err) {
-      setError("Username or password invalid");
+      setError("Invalid credentials. Please try again.");
     }
   };
 
